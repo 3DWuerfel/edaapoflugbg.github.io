@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Überraschung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
+        }
+        .box {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/869/869869.png'); /* Geschenkbox Icon */
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: transform 0.1s ease-in-out;
+        }
+        .info {
+            display: none;
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .word {
+            opacity: 0;
+            display: inline-block;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .shake {
+            animation: shake 0.3s ease-in-out 3;
+        }
+        .glow {
+            box-shadow: 0 0 15px yellow;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Klick die Geschenkbox mehrmals für eine Überraschung!</h1>
+    <div class="box" id="box" onclick="openBox()"></div>
+    <div class="info" id="infoBox">
+        <span class="word" id="word1">🎉</span>
+        <span class="word" id="word2">Wir</span>
+        <span class="word" id="word3">fliegen</span>
+        <span class="word" id="word4">nach</span>
+        <span class="word" id="word5">ROM!</span>
+        <span class="word" id="word6">✈️🇮🇹</span>
+    </div>
+    
+    <script>
+        let clicks = 0;
+        function openBox() {
+            const box = document.getElementById("box");
+            clicks++;
+            box.classList.add("shake");
+            setTimeout(() => box.classList.remove("shake"), 300);
+            
+            if (clicks === 3) {
+                box.classList.add("glow");
+            }
+            
+            if (clicks === 5) {
+                box.style.display = "none";
+                revealWords();
+            }
+        }
+        
+        function revealWords() {
+            document.getElementById("infoBox").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("word2").style.opacity = "1";
+                document.getElementById("word3").style.opacity = "1";
+            }, 500);
+            setTimeout(() => {
+                document.getElementById("word4").style.opacity = "1";
+            }, 1500);
+            setTimeout(() => {
+                document.getElementById("word5").style.opacity = "1";
+            }, 3000);
+            setTimeout(() => {
+                document.getElementById("word6").style.opacity = "1";
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
